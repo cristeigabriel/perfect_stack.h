@@ -35,6 +35,7 @@ Lrestart:
 	while (NULL == (work = Stack_pop_WORK(&ctx->workload))) {
 		// Check if threadpool should perish
 		if (_InterlockedCompareExchange(&g_finished, 1, 1) != 0) {
+			Stack_free_WORK(&threadpool->workload);
 			return 0;
 		}
 		Sleep(500);
