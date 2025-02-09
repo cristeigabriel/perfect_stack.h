@@ -70,9 +70,9 @@
     InterlockedExchange((volatile LONG *)&self->m_len, 0);                     \
   }                                                                            \
   static void Stack_free_##t(Stack_##t *self) {                                \
-    free(self->m_els);                                                         \
     InterlockedExchange((volatile LONG *)&self->m_len, 0);                     \
     InterlockedExchange((volatile LONG *)&self->m_cap, 0);                     \
+    free(self->m_els);                                                         \
   }
 
 #endif /* STACK_H */
