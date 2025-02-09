@@ -66,8 +66,10 @@
     return &(self->m_els[self->m_len]);                                        \
   }                                                                            \
   static void Stack_clear_##t(Stack_##t *self) {                               \
+    long len;                                                                  \
+    len = self->m_len;                                                         \
     InterlockedExchange((volatile LONG *)&self->m_len, 0);                     \
-    memset(self->m_els, 0, sizeof(*self->m_els) * self->m_len);                \
+    memset(self->m_els, 0, sizeof(*self->m_els) * len);                        \
   }                                                                            \
   static void Stack_free_##t(Stack_##t *self) {                                \
     InterlockedExchange((volatile LONG *)&self->m_len, 0);                     \
